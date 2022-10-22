@@ -34,9 +34,15 @@ module.exports = {
       "@typescript-eslint/no-non-null-assertion": "off",
       "react/react-in-jsx-scope": "off",
       "class-methods-use-this": "off",
-      "@typescript-eslint/non-nullable-type-assertion-style": "off"
-    },
-  } ],
+      "@typescript-eslint/non-nullable-type-assertion-style": "off",
+      'no-param-reassign': ['error', {
+        props: true,
+        ignorePropertyModificationsFor: [
+          'state',
+        ]
+      }]
+    }
+  }],
   parser: '@typescript-eslint/parser',
   plugins: [ 'react', 'react-hooks', '@typescript-eslint', 'eslint-plugin-react-hooks' ],
   settings: {
