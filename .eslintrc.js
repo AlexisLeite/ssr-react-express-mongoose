@@ -25,21 +25,10 @@ module.exports = {
       quotes: [ 'error', 'single' ],
       semi: [ 'error', 'always' ],
       'react-hooks/rules-of-hooks': 'error',
-      'react-hooks/exhaustive-deps': 'warn',
-      'react/prop-types': 'off',
-      'no-multiple-empty-lines': [ 'error', {
-        max: 1 
-      } ],
-      'object-curly-spacing': [ 'error','always' ],
-      'array-bracket-spacing': [ 'error','always' ],
-      'consistent-return': 2,
-      'no-else-return': 1,
-      'space-unary-ops': 2,
-      'array-bracket-newline':        [ 'error', 'consistent' ],
-      'space-before-blocks': 'error',
       'no-console': 'off',
       'import/extensions': ['error','never'],
-      'no-void': 'off'
+      'no-void': 'off',
+      "no-restricted-globals": ["error", "event", "fdescribe"]
     },
   } ],
   parser: '@typescript-eslint/parser',
