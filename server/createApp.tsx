@@ -14,8 +14,6 @@ export default async function createApp() {
 
   const connectionResult = await connectDb();
   if (!connectionResult) {
-
-    
     console.log(chalk.red('Could not connect the database. Application terminated.'));
     exit();
   }
@@ -23,8 +21,19 @@ export default async function createApp() {
 
   console.log('Creating application routes.');
   app.get('/', (req, res) => {
-    res.send('Hello world');
+    const html = `
+        <html lang="en">
+        <head>
+            <script src="app.js" async defer></script>
+        </head>
+        <body>
+            <div id="root"></div>
+        </body>
+        </html>
+    `;
+    res.send(html);
   });
+  app.use(express.static('./build'));
   app.use('/api', router);
 
   app.listen(port, () => {

@@ -2,6 +2,7 @@ module.exports = {
   env: {
     es2021: true,
     node: true,
+    browser: true
   },
   extends: [
     'eslint:recommended',
@@ -28,7 +29,9 @@ module.exports = {
       'no-console': 'off',
       'import/extensions': ['error','never'],
       'no-void': 'off',
-      "no-restricted-globals": ["error", "event", "fdescribe"]
+      "no-restricted-globals": ["error", "event", "fdescribe"],
+      "@typescript-eslint/no-unnecessary-type-assertion": "off",
+      "@typescript-eslint/no-non-null-assertion": "off"
     },
   } ],
   parser: '@typescript-eslint/parser',

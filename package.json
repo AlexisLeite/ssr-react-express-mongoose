@@ -4,21 +4,24 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "npx tsc",
-    "start": "node build/index.js",
-    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q build/index.js\""
+    "build:client": "esbuild client/index.tsx --bundle --outfile=build/app.js --watch",
+    "build:server": "esbuild server/index.ts --bundle --outfile=build/server.js --platform=node --watch",
+    "build": "concurrently \"npm run build:client\" \"npm run build:server\"",
+    "start": "concurrently \"npm run build:client\" \"npm run build:server\" \"nodemon build/server.js\""
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "chalk": "^4.1.2",
     "dotenv": "^16.0.3",
+    "esbuild": "^0.15.12",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^8.5.0",
     "express": "^4.18.2",
     "lodash": "^4.17.21",
     "mongoose": "^6.6.7",
     "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "typescript": "^4.8.4"
   },
   "devDependencies": {
@@ -26,6 +29,7 @@
     "@types/lodash": "^4.14.186",
     "@types/node": "^18.11.3",
     "@types/react": "^18.0.21",
+    "@types/react-dom": "^18.0.6",
     "@typescript-eslint/eslint-plugin": "^5.40.1",
     "@typescript-eslint/parser": "^5.40.1",
     "concurrently": "^7.4.0",
