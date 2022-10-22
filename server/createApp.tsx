@@ -8,6 +8,8 @@ import router from './routes';
 import App from '../client/App';
 import templater from './util/templater';
 
+export const apiPrefix = '/api';
+
 export default async function createApp() {
   dotenv.config();
   const app = express();
@@ -29,7 +31,7 @@ export default async function createApp() {
     res.send(html);
   });
   app.use(express.static('./build'));
-  app.use('/api', router);
+  app.use(apiPrefix, router);
 
   app.listen(port, () => {
     console.log(chalk.green('Everythink is ok, app is running.'));

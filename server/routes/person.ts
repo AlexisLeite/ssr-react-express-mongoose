@@ -4,7 +4,7 @@ import { todo, info } from '../util';
 import { handleRequest } from '../handlers';
 import Person, { IPerson } from '../model/person';
 
-const prefix = '/person'
+const prefix = '/person';
 
 export default function person(router: Router) {
   router.post<ParamsDictionary, unknown, IPerson>(`${prefix}`, (req, res) => {
@@ -22,7 +22,7 @@ export default function person(router: Router) {
     });
   });
 
-  router.get(`${prefix}/all`, (req, res) => {
+  router.get(prefix, (req, res) => {
     handleRequest(req, res, async () => {
       const data = await Person.find();
       res.json(data);
