@@ -2,8 +2,11 @@ import chalk from 'chalk';
 import dotenv from 'dotenv';
 import express from 'express';
 import { exit } from 'process';
+import * as ReactDOMServer from 'react-dom/server';
 import connectDb from './connectDb';
 import router from './routes';
+import App from '../client/App';
+import templater from './util/templater';
 
 export default async function createApp() {
   dotenv.config();
@@ -21,16 +24,8 @@ export default async function createApp() {
 
   console.log('Creating application routes.');
   app.get('/', (req, res) => {
-    const html = `
-        <html lang="en">
-        <head>
-            <script src="app.js" async defer></script>
-        </head>
-        <body>
-            <div id="root"></div>
-        </body>
-        </html>
-    `;
+    const reactApp = ReactDOMServer.renderToString(<App />);
+    const html = templater.loadFromFile('./server/templates/application.html', { replacements: { reactApp } });
     res.send(html);
   });
   app.use(express.static('./build'));

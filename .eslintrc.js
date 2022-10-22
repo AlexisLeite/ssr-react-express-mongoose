@@ -31,7 +31,9 @@ module.exports = {
       'no-void': 'off',
       "no-restricted-globals": ["error", "event", "fdescribe"],
       "@typescript-eslint/no-unnecessary-type-assertion": "off",
-      "@typescript-eslint/no-non-null-assertion": "off"
+      "@typescript-eslint/no-non-null-assertion": "off",
+      "react/react-in-jsx-scope": "off",
+      "class-methods-use-this": "off"
     },
   } ],
   parser: '@typescript-eslint/parser',
@@ -40,6 +42,9 @@ module.exports = {
     'import/resolver': {
       typescript: {
       }
+    },
+    "react": {
+      version: "detect"
     }
   }
 };

@@ -1,5 +1,9 @@
 import chalk from 'chalk';
 
+/**
+ * Convierte un valor a número, si este casteo produce un
+ * NaN, devuelve el defaultValue.
+ */
 export function noNaN(value: unknown, defaultValue = 0) {
   const castedToNumber = Number(value);
   if (isNaN(castedToNumber)) return defaultValue;
@@ -22,4 +26,12 @@ export function todo(text: string) {
   console.log('');
   console.log(chalk.yellow(`TODO: ${text}`));
   console.log('');
+}
+
+export function replacePlaceholders(text: string, placeholders: Record<string, unknown>) {
+  let newText = text;
+  Object.entries(placeholders).forEach(([key, value]) => {
+    newText = newText.replaceAll(`{{${key}}}`, String(value));
+  });
+  return newText;
 }
