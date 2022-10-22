@@ -8,21 +8,41 @@ export interface IPostRequestConfig extends IRequestConfig {
   postData?: unknown;
 }
 
+interface IServerError {
+  message: string;
+}
+
 const api = new (class Api {
-  async get<T>(url: string, config?: IRequestConfig) {
-    return axios.get(url, config?.axiosConfig) as Promise<AxiosResponse<T>>;
+  async parseResponse<T>(response: Promise<AxiosResponse<T>>): Promise<AxiosResponse<T> | null> {
+    try {
+      const result = await response.catch(console.error);
+
+      if (result && (result.data as IServerError).message) {
+        console.error(result.data);
+      }
+
+      if (result) return result;
+    } catch (e) {
+      console.error(e);
+    }
+
+    return null;
   }
 
-  async delete<T>(url: string, config?: IRequestConfig) {
-    return axios.delete(url, config?.axiosConfig) as Promise<AxiosResponse<T>>;
+  async get<T>(url: string, config?: IRequestConfig): Promise<AxiosResponse<T> | null> {
+    return this.parseResponse(axios.get(url, config?.axiosConfig));
   }
 
-  async patch<T>(url: string, config?: IPostRequestConfig) {
-    return axios.patch(url, config?.postData, config?.axiosConfig) as Promise<AxiosResponse<T>>;
+  async delete<T>(url: string, config?: IRequestConfig): Promise<AxiosResponse<T> | null> {
+    return this.parseResponse(axios.delete(url, config?.axiosConfig));
   }
 
-  async post<T>(url: string, config?: IPostRequestConfig) {
-    return axios.post(url, config?.postData, config?.axiosConfig) as Promise<AxiosResponse<T>>;
+  async patch<T>(url: string, config?: IPostRequestConfig): Promise<AxiosResponse<T> | null> {
+    return this.parseResponse(axios.patch(url, config?.postData, config?.axiosConfig));
+  }
+
+  async post<T>(url: string, config?: IPostRequestConfig): Promise<AxiosResponse<T> | null> {
+    return this.parseResponse(axios.post(url, config?.postData, config?.axiosConfig));
   }
 })();
 
