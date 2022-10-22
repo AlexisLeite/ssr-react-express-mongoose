@@ -33,7 +33,8 @@ module.exports = {
       "@typescript-eslint/no-unnecessary-type-assertion": "off",
       "@typescript-eslint/no-non-null-assertion": "off",
       "react/react-in-jsx-scope": "off",
-      "class-methods-use-this": "off"
+      "class-methods-use-this": "off",
+      "@typescript-eslint/non-nullable-type-assertion-style": "off"
     },
   } ],
   parser: '@typescript-eslint/parser',
