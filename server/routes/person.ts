@@ -9,7 +9,9 @@ const prefix = '/person';
 export default function person(router: Router) {
   router.post<ParamsDictionary, unknown, IPerson>(`${prefix}`, (req, res) => {
     handleRequest(req, res, async () => {
-      todo('Search if there it exists some with the same name or maybe configure the schema to have a unique name');
+      todo(
+        'Search if there it exists some with the same name or maybe configure the schema to have a unique name',
+      );
 
       const data = new Person({
         name: req.body.name,
@@ -17,7 +19,7 @@ export default function person(router: Router) {
       });
       const dataToSave = await data.save();
 
-      info((`Saved entry with name: ${req.body.name} and age ${req.body.age}`));
+      info(`Saved entry with name: ${req.body.name} and age ${req.body.age}`);
       res.status(200).json(dataToSave);
     });
   });

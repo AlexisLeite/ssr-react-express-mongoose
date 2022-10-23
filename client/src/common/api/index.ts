@@ -48,7 +48,7 @@ const api = new (class Api {
 
 export function makeApiUrl(url: string, parameters?: Record<string, unknown>) {
   const actualParameters = Object.entries(parameters ?? {})
-    .map<[string, unknown]>((key, value) => ([String(key), String(value)]))
+    .map<[string, unknown]>((key, value) => [String(key), String(value)])
     .reduce((accumulated, [key, value]) => ({ ...accumulated, [key]: value }), {});
 
   const searchParams = new URLSearchParams(actualParameters).toString();

@@ -27,7 +27,9 @@ export default async function createApp() {
   console.log('Creating application routes.');
   app.get('/', (req, res) => {
     const reactApp = ReactDOMServer.renderToString(<App />);
-    const html = templater.loadFromFile('./server/templates/application.html', { replacements: { reactApp } });
+    const html = templater.loadFromFile('./server/templates/application.html', {
+      replacements: { reactApp },
+    });
     res.send(html);
   });
   app.use(express.static('./build'));

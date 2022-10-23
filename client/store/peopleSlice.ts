@@ -10,7 +10,7 @@ export interface IPerson {
 
 interface IPeopleState {
   isLoading: boolean;
-  people: IPerson[]
+  people: IPerson[];
 }
 
 const loadAll = createAsyncThunk('peopleSlice/loadAll', async () => {
@@ -19,11 +19,14 @@ const loadAll = createAsyncThunk('peopleSlice/loadAll', async () => {
   return result?.data;
 });
 
-const update = createAsyncThunk<IPerson | null, {
-  _id: string;
-  name: string;
-  age: number;
-}>('peopleSlice/update', async (payload) => {
+const update = createAsyncThunk<
+  IPerson | null,
+  {
+    _id: string;
+    name: string;
+    age: number;
+  }
+>('peopleSlice/update', async (payload) => {
   const result = await api.patch<IPerson>(makeApiUrl(`person/${payload._id}`), {
     postData: {
       name: payload.name,
@@ -41,7 +44,7 @@ const peopleSlice = createSlice({
   } as IPeopleState,
   name: 'peopleSlice',
   reducers: {},
-  extraReducers: ((builder) => {
+  extraReducers: (builder) => {
     [loadAll, update].forEach((current) => {
       builder.addCase(current.rejected, (state, { error }) => {
         state.isLoading = false;
@@ -63,12 +66,12 @@ const peopleSlice = createSlice({
     builder.addCase(update.fulfilled, (state, { payload }) => {
       state.isLoading = false;
       if (payload) {
-        state.people = state.people.map(
-          (current) => (current._id === payload._id ? payload : current),
+        state.people = state.people.map((current) =>
+          current._id === payload._id ? payload : current,
         );
       }
     });
-  }),
+  },
 });
 
 export const peopleActions = { ...peopleSlice.actions, loadAll, update };

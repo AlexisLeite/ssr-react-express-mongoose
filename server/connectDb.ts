@@ -8,12 +8,14 @@ export default function connectDb() {
 
     const connection = mongoose.connect(mongoString);
 
-    connection.then(() => {
-      resolve(true);
-    }).catch((error) => {
-      console.error(error);
-      resolve(false);
-    });
+    connection
+      .then(() => {
+        resolve(true);
+      })
+      .catch((error) => {
+        console.error(error);
+        resolve(false);
+      });
 
     const database = mongoose.connection;
 

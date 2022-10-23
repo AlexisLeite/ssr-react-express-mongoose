@@ -12,10 +12,14 @@ const People = () => {
     void store.dispatch(peopleActions.loadAll());
   });
 
-  return <div>
-    {isLoading && <>Cargando...</>}
-    {people.map((current) => (<Person key={current.name} person={current} />))}
-  </div>;
+  return (
+    <div>
+      {isLoading && <>Cargando...</>}
+      {people.map((current) => (
+        <Person key={current.name} person={current} />
+      ))}
+    </div>
+  );
 };
 
 export default People;

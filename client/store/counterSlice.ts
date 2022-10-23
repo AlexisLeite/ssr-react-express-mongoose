@@ -6,7 +6,7 @@ const counterSlice = createSlice({
   },
   name: 'counterSlice',
   reducers: {
-    sum(state, { payload }:PayloadAction<number>) {
+    sum(state, { payload }: PayloadAction<number>) {
       state.count += payload;
     },
   },
