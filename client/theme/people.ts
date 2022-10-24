@@ -2,7 +2,6 @@ import { Theme } from '@mui/system';
 
 const people = {
   manager: (theme: Theme) => ({
-    margin: `${theme.spacing(6)} 0`,
     '.paper': {
       p: theme.spacing(3),
       display: 'flex',

@@ -1,9 +1,11 @@
 /* eslint-disable no-shadow */
 import { createTheme } from '@mui/material';
+import mainLayout from './mainLayout';
 import people from './people';
 
 const themeProps = {
   my: {
+    mainLayout,
     people,
   },
 };

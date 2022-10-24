@@ -17,11 +17,13 @@ const People = () => {
   useEffect(() => {
     if (!isLoading) {
       setAddingPerson(false);
-      (
-        (ref.current as HTMLElement | undefined)?.querySelector('input[type="text"]') as
-          | HTMLElement
-          | undefined
-      )?.focus();
+      if (document.activeElement?.tagName !== 'INPUT') {
+        (
+          (ref.current as HTMLElement | undefined)?.querySelector('input[type="text"]') as
+            | HTMLElement
+            | undefined
+        )?.focus();
+      }
     }
   }, [isLoading]);
 

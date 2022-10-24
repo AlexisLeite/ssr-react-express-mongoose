@@ -5,6 +5,7 @@ import '@fontsource/roboto/700.css';
 import { Container, CssBaseline, ThemeProvider } from '@mui/material';
 import { useEffect } from 'react';
 import { Provider } from 'react-redux';
+import AlertsList from './src/components/AlertsList';
 import People from './src/components/people';
 import store from './store';
 import appTheme from './theme';
@@ -18,7 +19,8 @@ export default function App() {
     <Provider store={store}>
       <CssBaseline />
       <ThemeProvider theme={appTheme}>
-        <Container className="mainContainer" maxWidth="sm">
+        <Container className="mainContainer" sx={(theme) => ({ ...theme.my.mainLayout(theme) })}>
+          <AlertsList />
           <People />
         </Container>
       </ThemeProvider>

@@ -1,4 +1,6 @@
-import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
+import store from '../../../store';
+import { alertActions } from '../../../store/alertSlice';
 
 export interface IRequestConfig {
   axiosConfig?: AxiosRequestConfig;
@@ -15,14 +17,29 @@ interface IServerError {
 const api = new (class Api {
   async parseResponse<T>(response: Promise<AxiosResponse<T>>): Promise<AxiosResponse<T> | null> {
     try {
-      const result = await response.catch(console.error);
-
-      if (result && (result.data as IServerError).message) {
-        console.error(result.data);
-      }
+      const result = await response.catch((error) => {
+        if (error instanceof AxiosError) {
+          store.dispatch(
+            alertActions.notify({
+              type: 'error',
+              message:
+                (error.response?.data as IServerError | undefined)?.message ??
+                'An error occurred while requesting the server',
+            }),
+          );
+        } else {
+          store.dispatch(
+            alertActions.notify({
+              type: 'error',
+              message: 'An error occurred while requesting the server',
+            }),
+          );
+        }
+      });
 
       if (result) return result;
     } catch (e) {
+      console.log('e');
       console.error(e);
     }
 
