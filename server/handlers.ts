@@ -17,7 +17,7 @@ export function handleRequest(
   res: Response,
   request: () => unknown | Promise<unknown>,
 ) {
-  console.log(chalk.yellow(`Received request with url:  ${req.url}`));
+  console.log(chalk.yellow(`[${chalk.green(req.method)}]Received request with url:  ${req.url}`));
   if (Object.values(req.body as object).length > 0) console.log(chalk.yellow('Body: '), req.body);
 
   try {

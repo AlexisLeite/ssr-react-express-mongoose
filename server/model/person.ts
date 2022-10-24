@@ -9,6 +9,7 @@ const dataSchema = new Schema({
   name: {
     required: true,
     type: String,
+    unique: true,
   },
   age: {
     required: true,

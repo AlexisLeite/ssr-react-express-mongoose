@@ -4,7 +4,12 @@ module.exports = {
     node: true,
     browser: true,
   },
-  extends: ['eslint:recommended', 'plugin:react/recommended', 'plugin:prettier/recommended'],
+  extends: [
+    'eslint:recommended',
+    'plugin:react/recommended',
+    'plugin:prettier/recommended',
+    'plugin:react-hooks/recommended',
+  ],
   overrides: [
     {
       extends: [
@@ -23,6 +28,7 @@ module.exports = {
         quotes: ['error', 'single'],
         semi: ['error', 'always'],
         'react-hooks/rules-of-hooks': 'error',
+        'react-hooks/exhaustive-deps': 'warn',
         'no-console': 'off',
         'import/extensions': ['error', 'never'],
         'no-void': 'off',
@@ -42,6 +48,10 @@ module.exports = {
         'no-confusing-arrow': 'off',
         'implicit-arrow-linebreak': 'off',
         'function-paren-newline': 'off',
+        'object-curly-newline': 'off',
+        'no-underscore-dangle': 'off',
+        'operator-linebreak': 'off',
+        '@typescript-eslint/no-empty-function': 'off',
       },
     },
   ],
